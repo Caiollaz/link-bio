@@ -7,7 +7,7 @@
   "homepage": "https://codebycaio.com.br",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Caiollaz/codebycaio.git"
+    "url": "https://github.com/Caiollaz/link-bio.git"
   },
   "engines": {
     "node": ">=22.23.4"
