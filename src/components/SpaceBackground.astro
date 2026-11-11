@@ -1,0 +1,78 @@
+<div class="fundo" aria-hidden="true">
+  <span class="estrela e1"></span>
+  <span class="estrela e2"></span>
+  <span class="estrela e3"></span>
+  <span class="estrela e4"></span>
+  <span class="estrela e5"></span>
+</div>
+
+<style>
+  .fundo {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(45% 40% at 6% 22%, var(--aurora-1), transparent 70%),
+      radial-gradient(40% 40% at 98% 58%, var(--aurora-2), transparent 70%),
+      radial-gradient(40% 32% at 62% 104%, var(--aurora-1), transparent 70%);
+  }
+
+  .fundo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grade) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grade) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(75% 65% at 50% 35%, #000, transparent);
+    mask-image: radial-gradient(75% 65% at 50% 35%, #000, transparent);
+  }
+
+  .estrela {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--estrela);
+    clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+    opacity: 0.6;
+  }
+
+  .e1 {
+    top: 9%;
+    left: 34%;
+  }
+
+  .e2 {
+    top: 22%;
+    right: 7%;
+    width: 9px;
+    height: 9px;
+    opacity: 0.45;
+  }
+
+  .e3 {
+    top: 62%;
+    left: 3%;
+    width: 8px;
+    height: 8px;
+    opacity: 0.4;
+  }
+
+  .e4 {
+    bottom: 9%;
+    right: 28%;
+    width: 10px;
+    height: 10px;
+    opacity: 0.5;
+  }
+
+  .e5 {
+    top: 44%;
+    left: 46%;
+    width: 6px;
+    height: 6px;
+    opacity: 0.35;
+  }
+</style>

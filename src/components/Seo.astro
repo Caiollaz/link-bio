@@ -1,0 +1,44 @@
+---
+import { perfil, seo } from '../data/perfil';
+
+interface Props {
+  titulo: string;
+  descricao: string;
+  imagem?: string;
+  indexar?: boolean;
+  dadosEstruturados?: object;
+}
+
+const { titulo, descricao, imagem = '/og.png', indexar = true, dadosEstruturados } = Astro.props;
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonico = new URL(Astro.url.pathname, site).href;
+const imagemUrl = new URL(imagem, site).href;
+---
+
+<title>{titulo}</title>
+<meta name="description" content={descricao} />
+<meta name="author" content={perfil.nome} />
+<meta name="robots" content={indexar ? 'index, follow, max-image-preview:large' : 'noindex, follow'} />
+{indexar && <link rel="canonical" href={canonico} />}
+<link rel="sitemap" href="/sitemap.xml" />
+<link rel="alternate" type="text/plain" href="/llms.txt" title="Resumo para modelos de linguagem" />
+
+<meta property="og:type" content="profile" />
+<meta property="og:site_name" content={perfil.nome} />
+<meta property="og:locale" content={seo.locale} />
+<meta property="og:title" content={titulo} />
+<meta property="og:description" content={descricao} />
+<meta property="og:url" content={canonico} />
+<meta property="og:image" content={imagemUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={`${perfil.nome}, ${perfil.titulo}`} />
+<meta property="profile:first_name" content={perfil.primeiroNome} />
+<meta property="profile:last_name" content={perfil.sobrenome} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={titulo} />
+<meta name="twitter:description" content={descricao} />
+<meta name="twitter:image" content={imagemUrl} />
+
+{dadosEstruturados && <script type="application/ld+json" set:html={JSON.stringify(dadosEstruturados)} />}

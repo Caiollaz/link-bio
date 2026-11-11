@@ -1,0 +1,134 @@
+:root {
+  color-scheme: dark;
+
+  --page: #070806;
+  --raised: #0e100c;
+  --raised-2: #171a13;
+  --raised-3: #20241a;
+  --line: #1f2419;
+  --text: #f1f3ea;
+  --text-2: #b7bdaa;
+  --text-3: #8a9180;
+  --accent: #c6f04a;
+  --card-edge: rgb(255 255 255 / 0.07);
+  --aurora-1: rgb(120 200 60 / 0.3);
+  --aurora-2: rgb(40 150 125 / 0.24);
+  --grade: rgb(255 255 255 / 0.035);
+  --estrela: #c6f04a;
+  --mostra-sol: block;
+  --mostra-lua: none;
+
+  --font: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --r: 6px;
+
+  --gutter: 16px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --page: #f2f5ea;
+  --raised: #ffffff;
+  --raised-2: #e9eedd;
+  --raised-3: #dde4cd;
+  --line: #dbe1cd;
+  --text: #11140c;
+  --text-2: #424a35;
+  --text-3: #5e6652;
+  --accent: #3f6b0a;
+  --card-edge: rgb(0 0 0 / 0.1);
+  --aurora-1: rgb(160 220 70 / 0.32);
+  --aurora-2: rgb(70 170 140 / 0.16);
+  --grade: rgb(17 20 12 / 0.045);
+  --estrela: #6a9a1c;
+  --mostra-sol: none;
+  --mostra-lua: block;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --gutter: 24px;
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --gutter: clamp(24px, 3.5vw, 96px);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

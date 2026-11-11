@@ -1,0 +1,116 @@
+---
+import { Image } from 'astro:assets';
+import SocialLinks from './SocialLinks.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { perfil, redes } from '../data/perfil';
+---
+
+<header class="perfil">
+  <div class="foto">
+    <Image
+      src={perfil.foto}
+      alt={`Foto de ${perfil.nome}`}
+      widths={[400, 600, 800]}
+      sizes="(min-width: 960px) 32vw, 100vw"
+      loading="eager"
+      fetchpriority="high"
+      format="webp"
+      quality={82}
+    />
+    <ThemeToggle />
+    <div class="foto-texto">
+      <h1 class="nome">{perfil.nome}</h1>
+      <p class="titulo">{perfil.titulo}</p>
+    </div>
+  </div>
+
+  <div class="corpo">
+    <p class="bio">{perfil.bio}</p>
+  </div>
+
+  <SocialLinks redes={redes} />
+</header>
+
+<style>
+  .perfil {
+    background: var(--raised);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: var(--space-2);
+  }
+
+  .foto {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--r);
+    overflow: hidden;
+    background: var(--raised-2);
+  }
+
+  .foto :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 35%;
+  }
+
+  .foto-texto {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: var(--space-16) var(--space-5) var(--space-5);
+    background: linear-gradient(to top, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0.4) 55%, transparent);
+    color: #fff;
+  }
+
+  .nome {
+    font-size: clamp(32px, 8.5vw, 44px);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  .titulo {
+    margin-top: var(--space-2);
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(255 255 255 / 0.8);
+    text-wrap: balance;
+  }
+
+  .corpo {
+    padding: var(--space-5) var(--space-3) var(--space-4);
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .bio {
+    max-width: 40ch;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--text-2);
+    text-wrap: pretty;
+  }
+
+  @media (min-width: 960px) {
+    .perfil {
+      position: sticky;
+      top: clamp(24px, 6vh, 96px);
+      align-self: start;
+    }
+
+    .foto {
+      aspect-ratio: 4 / 5;
+    }
+
+    .nome {
+      font-size: clamp(36px, 2.8vw, 72px);
+    }
+  }
+
+  @media (min-width: 1800px) {
+    .bio {
+      font-size: 18px;
+    }
+  }
+</style>

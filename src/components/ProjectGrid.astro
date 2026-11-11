@@ -1,0 +1,53 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import type { ProjetoNaGrade } from '../lib/links';
+
+interface Props {
+  projetos: ProjetoNaGrade[];
+}
+
+const { projetos } = Astro.props;
+---
+
+<section class="projetos" aria-labelledby="projetos-titulo">
+  <h2 id="projetos-titulo" class="titulo">
+    Empresa e projetos <span class="contagem" aria-hidden="true">{String(projetos.length).padStart(2, '0')}</span>
+  </h2>
+  <ul class="grade">
+    {projetos.map((projeto) => <ProjectCard projeto={projeto} />)}
+  </ul>
+</section>
+
+<style>
+  .titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0 var(--space-1) var(--space-3);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-2);
+  }
+
+  .contagem {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .grade {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 640px) {
+    .grade {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 960px) {
+    .projetos {
+      padding-top: var(--space-1);
+    }
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import SpaceBackground from '../components/SpaceBackground.astro';
+import { seo } from '../data/perfil';
+
+interface Props {
+  titulo: string;
+  descricao: string;
+  indexar?: boolean;
+  dadosEstruturados?: object;
+}
+
+const { titulo, descricao, indexar = true, dadosEstruturados } = Astro.props;
+---
+
+<!doctype html>
+<html lang={seo.idioma}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content={seo.corEscura} />
+    <script is:inline define:vars={{ clara: seo.corClara }}>
+      document.documentElement.classList.add('js');
+      try {
+        if (localStorage.getItem('tema') === 'light') {
+          document.documentElement.dataset.theme = 'light';
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', clara);
+        }
+      } catch {}
+    </script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <Seo titulo={titulo} descricao={descricao} indexar={indexar} dadosEstruturados={dadosEstruturados} />
+  </head>
+  <body>
+    <SpaceBackground />
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,45 @@
+---
+import { getImage } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import ProfileCard from '../components/ProfileCard.astro';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { perfil, projetos, seo } from '../data/perfil';
+import { organizarProjetos } from '../lib/links';
+import { dadosEstruturados } from '../lib/schema';
+
+const lista = organizarProjetos(projetos);
+const site = Astro.site ?? new URL(Astro.url.origin);
+const foto = await getImage({ src: perfil.foto, width: 800, format: 'webp' });
+const schema = dadosEstruturados(site, new URL(foto.src, site).href);
+---
+
+<Layout titulo={seo.titulo} descricao={seo.descricao} dadosEstruturados={schema}>
+  <main class="pagina">
+    <ProfileCard />
+    <ProjectGrid projetos={lista} />
+    <SiteFooter atalhos={lista.length} />
+  </main>
+</Layout>
+
+<style>
+  .pagina {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    gap: var(--space-8);
+    padding:
+      max(var(--gutter), env(safe-area-inset-top)) max(var(--gutter), env(safe-area-inset-right))
+      max(var(--space-6), env(safe-area-inset-bottom)) max(var(--gutter), env(safe-area-inset-left));
+  }
+
+  @media (min-width: 960px) {
+    .pagina {
+      grid-template-columns: minmax(340px, 4fr) minmax(0, 8fr);
+      column-gap: clamp(24px, 3vw, 72px);
+      row-gap: var(--space-12);
+      padding-top: clamp(24px, 6vh, 96px);
+    }
+  }
+</style>

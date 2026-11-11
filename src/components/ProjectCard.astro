@@ -1,0 +1,238 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import type { ProjetoNaGrade } from '../lib/links';
+
+interface Props {
+  projeto: ProjetoNaGrade;
+}
+
+const { projeto } = Astro.props;
+---
+
+<li class:list={['item', { destaque: projeto.destaque }]}>
+  <a class="cartao" href={projeto.url} data-atalho={projeto.atalho} style={`--c-bg:${projeto.cor};--c-ink:${projeto.tinta}`}>
+    <div class="topo">
+      <Image class="icone" src={projeto.icone} alt="" width={112} height={112} format="webp" loading="lazy" />
+      <div class="texto">
+        <div class="linha">
+          <h3 class="rotulo">{projeto.nome}</h3>
+          <span class="papel">{projeto.papel}</span>
+        </div>
+        <p class="nota">{projeto.descricao}</p>
+      </div>
+    </div>
+
+    <div class="tela">
+      <Image
+        src={projeto.tela}
+        alt={`Página inicial do ${projeto.nome}`}
+        widths={[480, 720, 960, 1280]}
+        sizes={projeto.destaque ? '(min-width: 960px) 36vw, 70vw' : '(min-width: 960px) 26vw, (min-width: 640px) 34vw, 70vw'}
+        format="webp"
+        quality={78}
+        loading="lazy"
+      />
+    </div>
+
+    <span class="acao">
+      <span class="botao">
+        Abrir
+        <Icon nome="seta" tamanho={14} />
+      </span>
+      <span class="sr-only">{projeto.dominio}</span>
+    </span>
+  </a>
+</li>
+
+<style>
+  .cartao {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    min-height: 320px;
+    padding: var(--space-5);
+    border-radius: var(--r);
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--c-bg);
+    color: var(--c-ink);
+    box-shadow: inset 0 0 0 1px var(--card-edge);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .topo {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-4);
+  }
+
+  .topo :global(.icone) {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--r);
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.16);
+  }
+
+  .texto {
+    display: grid;
+    gap: var(--space-1);
+    min-width: 0;
+  }
+
+  .linha {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: var(--space-3);
+    row-gap: 2px;
+  }
+
+  .rotulo {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .papel {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: color-mix(in srgb, var(--c-ink) 78%, transparent);
+  }
+
+  .nota {
+    max-width: 36ch;
+    font-size: 16px;
+    line-height: 1.45;
+    color: color-mix(in srgb, var(--c-ink) 86%, transparent);
+    text-wrap: pretty;
+  }
+
+  .tela {
+    position: absolute;
+    z-index: 0;
+    right: -8%;
+    bottom: -10%;
+    width: 70%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--r);
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.14),
+      0 28px 56px -16px rgb(0 0 0 / 0.55);
+    transform: rotate(-4deg);
+    transform-origin: 100% 100%;
+    transition: transform 240ms var(--ease-out);
+  }
+
+  .tela :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .acao {
+    position: relative;
+    z-index: 1;
+    grid-row: 3;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .botao {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex: none;
+    height: 40px;
+    padding: 0 var(--space-4);
+    border-radius: var(--r);
+    background: color-mix(in srgb, var(--c-ink) 16%, transparent);
+    color: var(--c-ink);
+    font-size: 15px;
+    font-weight: 500;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background-color 160ms var(--ease-out);
+  }
+
+  .botao :global(svg) {
+    transition: transform 160ms var(--ease-out);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cartao:hover .tela {
+      transform: rotate(-2deg) translate(-6px, -8px);
+    }
+
+    .cartao:hover .botao {
+      background: color-mix(in srgb, var(--c-ink) 24%, transparent);
+    }
+
+    .cartao:hover .botao :global(svg) {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  @media (min-width: 640px) {
+    .destaque {
+      grid-column: 1 / -1;
+    }
+
+    .destaque .cartao {
+      min-height: 360px;
+    }
+
+    .destaque .nota {
+      max-width: 34ch;
+    }
+
+    .destaque .tela {
+      width: 58%;
+      right: -4%;
+      bottom: -14%;
+    }
+  }
+
+  @media (min-width: 1800px) {
+    .cartao {
+      min-height: 420px;
+      padding: var(--space-8);
+    }
+
+    .destaque .cartao {
+      min-height: 480px;
+    }
+
+    .rotulo {
+      font-size: 30px;
+    }
+
+    .nota {
+      font-size: 18px;
+    }
+
+    .topo :global(.icone) {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tela,
+    .botao,
+    .botao :global(svg) {
+      transition: none;
+    }
+  }
+</style>

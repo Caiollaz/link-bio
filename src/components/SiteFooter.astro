@@ -1,0 +1,79 @@
+---
+interface Props {
+  atalhos: number;
+}
+
+const { atalhos } = Astro.props;
+const hoje = new Date();
+const atualizado = hoje.toLocaleDateString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric' }).replace('.', '');
+---
+
+<footer class="rodape">
+  <span>Atualizado em <time datetime={hoje.toISOString().slice(0, 10)}>{atualizado}</time></span>
+  {
+    atalhos > 0 && (
+      <span class="dica">
+        Atalho: aperte <kbd>1</kbd>–<kbd>{Math.min(atalhos, 9)}</kbd>
+      </span>
+    )
+  }
+</footer>
+
+<script>
+  document.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
+    const alvo = e.target as HTMLElement | null;
+    if (alvo && (alvo.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(alvo.tagName))) return;
+    if (!/^[1-9]$/.test(e.key)) return;
+    const link = document.querySelector<HTMLAnchorElement>(`a[data-atalho="${e.key}"]`);
+    if (!link) return;
+    e.preventDefault();
+    link.focus();
+    link.click();
+  });
+</script>
+
+<style>
+  .rodape {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-6);
+    padding: var(--space-4) var(--space-1) 0;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--text-3);
+  }
+
+  .dica {
+    display: none;
+  }
+
+  kbd {
+    display: inline-grid;
+    place-items: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 var(--space-1);
+    border: 1px solid var(--line);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--text-2);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .dica {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .rodape {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

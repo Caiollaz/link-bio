@@ -1,0 +1,79 @@
+---
+import Icon from './Icon.astro';
+import { seo } from '../data/perfil';
+---
+
+<button class="tema" type="button" aria-label="Mudar para o tema claro" data-escura={seo.corEscura} data-clara={seo.corClara}>
+  <Icon nome="sol" tamanho={18} class="sol" />
+  <Icon nome="lua" tamanho={18} class="lua" />
+</button>
+
+<script>
+  const raiz = document.documentElement;
+  const botao = document.querySelector<HTMLButtonElement>('.tema');
+
+  const aplicar = () => {
+    if (!botao) return;
+    const claro = raiz.dataset.theme === 'light';
+    botao.setAttribute('aria-label', claro ? 'Mudar para o tema escuro' : 'Mudar para o tema claro');
+    const cor = claro ? botao.dataset.clara : botao.dataset.escura;
+    if (cor) document.querySelector('meta[name="theme-color"]')?.setAttribute('content', cor);
+  };
+
+  aplicar();
+
+  botao?.addEventListener('click', () => {
+    if (raiz.dataset.theme === 'light') delete raiz.dataset.theme;
+    else raiz.dataset.theme = 'light';
+    try {
+      localStorage.setItem('tema', raiz.dataset.theme === 'light' ? 'light' : 'dark');
+    } catch {}
+    aplicar();
+  });
+</script>
+
+<style>
+  .tema {
+    display: none;
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid rgb(255 255 255 / 0.18);
+    border-radius: var(--r);
+    background: rgb(0 0 0 / 0.38);
+    color: #fff;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background-color 160ms var(--ease-out);
+  }
+
+  :global(.js) .tema {
+    display: grid;
+  }
+
+  .tema :global(.sol) {
+    display: var(--mostra-sol);
+  }
+
+  .tema :global(.lua) {
+    display: var(--mostra-lua);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .tema:hover {
+      background: rgb(0 0 0 / 0.55);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tema {
+      transition: none;
+    }
+  }
+</style>

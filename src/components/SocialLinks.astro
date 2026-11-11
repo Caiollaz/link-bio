@@ -1,0 +1,69 @@
+---
+import Icon from './Icon.astro';
+import type { Rede } from '../data/perfil';
+
+interface Props {
+  redes: Rede[];
+}
+
+const { redes } = Astro.props;
+const visiveis = redes.filter((r) => r.url.trim() !== '');
+const icone = { LinkedIn: 'linkedin', GitHub: 'github', Instagram: 'instagram' } as const;
+---
+
+{
+  visiveis.length > 0 && (
+    <ul class="redes" aria-label="Redes e contato">
+      {visiveis.map((r) => (
+        <li>
+          <a class="rede" href={r.url} rel="me">
+            <Icon nome={icone[r.nome]} />
+            <span>{r.nome}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<style>
+  .redes {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+  }
+
+  .rede {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    height: 40px;
+    padding: 0 var(--space-3);
+    border-radius: var(--r);
+    background: var(--raised-2);
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 160ms var(--ease-out);
+  }
+
+  .rede:active {
+    background: var(--raised-3);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .rede:hover {
+      background: var(--raised-3);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rede {
+      transition: none;
+    }
+  }
+</style>
