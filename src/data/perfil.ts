@@ -47,7 +47,7 @@ export const perfil = {
   titulo: 'Engenheiro de Software Sênior na Chaves na Mão',
   bio: 'Full stack e IA aplicada. Sócio e CAIO da Mixlabs. Curitiba, PR.',
   resumo:
-    'Trabalha com desenvolvimento full stack e inteligência artificial aplicada. É sócio e Chief AI Officer (CAIO) da Mixlabs, CEO da DojoPlanner e cria produtos próprios como o Ramo, o Pokerly e o Yarnwise.',
+    'Trabalha com desenvolvimento full stack e inteligência artificial aplicada. É sócio e Chief AI Officer (CAIO) da Mixlabs, sócio e CEO da DojoPlanner e cria produtos próprios como o Ramo, o Pokerly e o Yarnwise.',
   cidade: 'Curitiba',
   estado: 'PR',
   pais: 'BR',
@@ -69,7 +69,7 @@ export const perfil = {
 export const seo = {
   titulo: 'Caio Labella · Engenheiro de Software Sênior, Full Stack e IA',
   descricao:
-    'Caio Labella, engenheiro de software sênior em Curitiba, full stack e IA aplicada. Sócio e CAIO da Mixlabs, CEO da DojoPlanner e criador do Ramo.',
+    'Caio Labella, engenheiro de software sênior em Curitiba, full stack e IA aplicada. Sócio e CAIO da Mixlabs, sócio e CEO da DojoPlanner e criador do Ramo.',
   idioma: 'pt-BR',
   locale: 'pt_BR',
   corEscura: '#070806',
@@ -117,7 +117,7 @@ export const projetos: Projeto[] = [
   {
     nome: 'DojoPlanner',
     url: 'https://dojoplanner.com.br',
-    papel: 'CEO',
+    papel: 'Sócio e CEO',
     relacao: 'socio',
     descricao: 'Gestão para academias de artes marciais: alunos, faixas, presenças e Pix.',
     tipo: 'Organization',
