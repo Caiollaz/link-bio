@@ -4,6 +4,10 @@ import ramoIcone from '../assets/projetos/ramo-icone.png';
 import ramoTela from '../assets/projetos/ramo.jpg';
 import mixlabsIcone from '../assets/projetos/mixlabs-icone.png';
 import mixlabsTela from '../assets/projetos/mixlabs.jpg';
+import brikIcone from '../assets/projetos/brik-icone.png';
+import brikTela from '../assets/projetos/brik.jpg';
+import dojoplannerIcone from '../assets/projetos/dojoplanner-icone.png';
+import dojoplannerTela from '../assets/projetos/dojoplanner.jpg';
 import proficioIcone from '../assets/projetos/proficio-icone.png';
 import proficioTela from '../assets/projetos/proficio.jpg';
 import ulumaIcone from '../assets/projetos/uluma-icone.png';
@@ -43,7 +47,7 @@ export const perfil = {
   titulo: 'Engenheiro de Software Sênior na Chaves na Mão',
   bio: 'Full stack e IA aplicada. Sócio e CAIO da Mixlabs. Curitiba, PR.',
   resumo:
-    'Trabalha com desenvolvimento full stack e inteligência artificial aplicada, é sócio e Chief AI Officer (CAIO) da Mixlabs e cria produtos próprios como o Ramo, o Pokerly e o Yarnwise.',
+    'Trabalha com desenvolvimento full stack e inteligência artificial aplicada. É sócio e Chief AI Officer (CAIO) da Mixlabs, CEO da DojoPlanner e cria produtos próprios como o Ramo, o Pokerly e o Yarnwise.',
   cidade: 'Curitiba',
   estado: 'PR',
   pais: 'BR',
@@ -65,7 +69,7 @@ export const perfil = {
 export const seo = {
   titulo: 'Caio Labella · Engenheiro de Software Sênior, Full Stack e IA',
   descricao:
-    'Caio Labella, engenheiro de software sênior em Curitiba, full stack e IA aplicada. Sócio e CAIO da Mixlabs e criador do Ramo, Pokerly e Yarnwise.',
+    'Caio Labella, engenheiro de software sênior em Curitiba, full stack e IA aplicada. Sócio e CAIO da Mixlabs, CEO da DojoPlanner e criador do Ramo.',
   idioma: 'pt-BR',
   locale: 'pt_BR',
   corEscura: '#070806',
@@ -97,6 +101,30 @@ export const projetos: Projeto[] = [
     tela: mixlabsTela,
     cor: '#3957bd',
     tinta: '#ffffff',
+  },
+  {
+    nome: 'Brik CRM',
+    url: 'https://brikcrm.com.br',
+    papel: 'Designer',
+    relacao: 'colaborador',
+    descricao: 'CRM de WhatsApp com IA: atendimento, funil de vendas e campanhas.',
+    tipo: 'WebApplication',
+    icone: brikIcone,
+    tela: brikTela,
+    cor: '#00275e',
+    tinta: '#ffffff',
+  },
+  {
+    nome: 'DojoPlanner',
+    url: 'https://dojoplanner.com.br',
+    papel: 'CEO',
+    relacao: 'socio',
+    descricao: 'Gestão para academias de artes marciais: alunos, faixas, presenças e Pix.',
+    tipo: 'Organization',
+    icone: dojoplannerIcone,
+    tela: dojoplannerTela,
+    cor: '#f97316',
+    tinta: '#16243f',
   },
   {
     nome: 'Proficio',
