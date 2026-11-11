@@ -74,6 +74,7 @@ export const seo = {
   locale: 'pt_BR',
   corEscura: '#070806',
   corClara: '#f2f5ea',
+  lupa: 'DNYcK4Fp',
 };
 
 export const projetos: Projeto[] = [

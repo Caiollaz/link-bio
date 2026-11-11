@@ -36,6 +36,7 @@ const { titulo, descricao, indexar = true, dadosEstruturados } = Astro.props;
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <Seo titulo={titulo} descricao={descricao} indexar={indexar} dadosEstruturados={dadosEstruturados} />
+    {seo.lupa && <script is:inline defer data-site={seo.lupa} src="https://lupa.click/js/p.js"></script>}
   </head>
   <body>
     <SpaceBackground />

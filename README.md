@@ -73,6 +73,13 @@ Para adicionar o Instagram, inclua `{ nome: 'Instagram', url: 'https://instagram
 - Imagens convertidas para WebP com `srcset`; a foto carrega com prioridade e o resto sob demanda.
 - CSS embutido no HTML e uma única fonte (JetBrains Mono).
 
+## Métricas
+
+As visitas são medidas pela [Lupa](https://lupa.click), sem cookies. O código do site fica em `seo.lupa`,
+em `src/data/perfil.ts`. Os cliques nos projetos e nas redes entram sozinhos como "Link externo", com o endereço.
+Visitas em `localhost` não contam. Para não contar as suas visitas no site publicado, rode no console do navegador
+`localStorage.lupa_ignore = '1'`.
+
 ## Imagem de compartilhamento
 
 `public/og.png` é o card que aparece quando o link é colado no LinkedIn, WhatsApp ou X.
